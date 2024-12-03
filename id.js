@@ -48,25 +48,19 @@ document.querySelector(".surname").innerHTML = surname.toUpperCase();
 document.querySelector(".firstname").innerHTML = firstname.toUpperCase();
 document.querySelector(".id_own_image").style.backgroundImage = "url('" + image + "')";
 
-const czas = document.querySelector('.czas');
+var options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+var date = new Date();
+document.querySelector(".bottom_update_value").innerHTML = date.toLocaleDateString("pl-PL", options);
 
-setInterval(() => {
-    const now = new Date();
-    const hour = now.getHours() < 10 ? `0${now.getHours()}` : now.getHours();
-    const minute = now.getMinutes() < 10 ? `0${now.getMinutes()}` : now.getMinutes();
-    const second = now.getSeconds() < 10 ? `0${now.getSeconds()}` : now.getSeconds();
-    const month = (now.getMonth()+1) < 10 ? `0${now.getMonth()+1}` : now.getMonth()+1;
-    const timeString = `Czas: ${hour}:${minute}:${second} ${now.getDate()}.${month}.${now.getFullYear()}`;
-    document.querySelector('.czas').innerHTML = timeString;
-    czas.innerHTML = timeString;
-}, 1000);
+setClock();
+function setClock(){
+    date = new Date();
+    time.innerHTML = "Czas: " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + " " + date.toLocaleDateString("pl-PL", options);    
+    delay(1000).then(() => {
+        setClock();
+    })
+}
 
-setInterval(() => {
-    const sukadziwkakurwa = document.getElementById('sukadziwkakurwa');
-
-    const date = new Date();
-    const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
-    const month = (date.getMonth()+1) < 10 ? `0${date.getMonth()+1}` : date.getMonth()+1;
-    const year = date.getFullYear();
-    sukadziwkakurwa.innerHTML = `${day}.${month}.${year}`;
-}, 1000);
+function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+}
