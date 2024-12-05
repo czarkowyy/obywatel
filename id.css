@@ -15,6 +15,7 @@
 /**styling**/
 body{
     background-color: #f5f6fb;
+    overflow: auto;
 }
 
 .back_img{
